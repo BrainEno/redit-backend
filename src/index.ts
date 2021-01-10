@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth";
 import postRoutes from "./routes/posts";
 import subRoutes from "./routes/subs";
+import miscRoutes from "./routes/misc";
 import trim from "./middleware/trim";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -30,6 +31,7 @@ app.get("/", (_, res) => res.send("Hello World!"));
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/subs", subRoutes);
+app.use("/api/misc", miscRoutes);
 
 const port = process.env.PORT;
 app.listen(port, async () => {
