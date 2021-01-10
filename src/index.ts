@@ -8,6 +8,7 @@ import postRoutes from "./routes/posts";
 import subRoutes from "./routes/subs";
 import trim from "./middleware/trim";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 
@@ -17,6 +18,13 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(trim);
 app.use(cookieParser());
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CLIENT,
+    optionsSuccessStatus: 200,
+  })
+);
 
 app.get("/", (_, res) => res.send("Hello World!"));
 app.use("/api/auth", authRoutes);

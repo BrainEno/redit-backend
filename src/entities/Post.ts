@@ -8,11 +8,11 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
+import { Expose } from "class-transformer";
 import User from "./User";
 import { makeId, slugify } from "../util/helper";
 import Sub from "./Sub";
 import Comment from "./Comment";
-
 @TOEntity("posts")
 export default class Post extends Entity {
   constructor(post: Partial<Post>) {
@@ -37,6 +37,9 @@ export default class Post extends Entity {
   @Column()
   subName: string;
 
+  @Column()
+  username: string;
+
   @ManyToOne(() => User, (user) => user.posts)
   @JoinColumn({ name: "username", referencedColumnName: "username" })
   user: User;
@@ -47,6 +50,15 @@ export default class Post extends Entity {
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
+
+  @Expose() get url(): string {
+    return `r/${this.subName}/${this.identifier}/${this.slug}`;
+  }
+  // protected url: string;
+  // @AfterLoad()
+  // createFields() {
+  //   this.url = `r/${this.subName}/${this.identifier}/${this.slug}`;
+  // }
 
   @BeforeInsert()
   makeIdAndSlug() {

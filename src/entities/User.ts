@@ -1,4 +1,4 @@
-import { IsEmail, MinLength } from "class-validator";
+import { IsEmail, Length, MinLength } from "class-validator";
 import {
   Entity as TOEntity,
   Column,
@@ -19,18 +19,19 @@ export default class User extends Entity {
   }
 
   @Index()
-  @MinLength(1)
+  @MinLength(1, { message: "用户名不得少于1个字符" })
   @Column({ unique: true })
   username: string;
 
   @Index()
-  @IsEmail()
+  @IsEmail(undefined, { message: "必须填入有效的邮箱地址" })
+  @Length(1, 255, { message: "邮箱地址为空" })
   @Column({ unique: true })
   email: string;
 
   @Exclude()
   @Column()
-  @MinLength(6)
+  @MinLength(6, { message: "密码不得小于6个字符" })
   password: string;
 
   @OneToMany(() => Post, (post) => post.user)
