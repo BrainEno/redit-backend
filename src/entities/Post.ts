@@ -8,7 +8,7 @@ import {
   ManyToOne,
   OneToMany,
 } from "typeorm";
-import { Expose } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
 import User from "./User";
 import { makeId, slugify } from "../util/helper";
 import Sub from "./Sub";
@@ -49,9 +49,11 @@ export default class Post extends Entity {
   @JoinColumn({ name: "subName", referencedColumnName: "name" })
   sub: Sub;
 
+  @Exclude()
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];
 
+  @Exclude()
   @OneToMany(() => Vote, (vote) => vote.post)
   votes: Vote[];
 
