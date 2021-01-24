@@ -133,7 +133,6 @@ const uploadSubImage = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({ error: "有什么地方出错了" });
   }
-  return res.json({ success: true });
 };
 
 const router = Router();
