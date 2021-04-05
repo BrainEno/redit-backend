@@ -30,9 +30,6 @@ module.exports =
         url: process.env.DATABASE_URL,
         synchronize: true,
         logging: false,
-        extra: {
-          ssl: true,
-        },
         entities: [rootDir + "/entities/**/*{.ts,.js}"],
         migrations: [rootDir + "/migrations/**/*{.ts,.js}"],
         subscribers: [rootDir + "/subscriber/**/*{.ts,.js}"],
