@@ -79,7 +79,6 @@ const login = async (req: Request, res: Response) => {
       cookie.serialize("redit", token, {
         httpOnly: true,
         // secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
         maxAge: 3600,
         path: "/",
       })
@@ -104,7 +103,6 @@ const logout = (_: Request, res: Response) => {
     cookie.serialize("redit", "", {
       httpOnly: true,
       // secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
       expires: new Date(0),
       path: "/",
     })
