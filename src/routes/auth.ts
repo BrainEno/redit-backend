@@ -58,7 +58,7 @@ const login = async (req: Request, res: Response) => {
 
     if (isEmpty(username)) errors.username = "用户名不得为空";
     if (isEmpty(password)) errors.username = "密码不得为空";
-    if (Object.keys(errors).length) {
+    if (Object.keys(errors).length > 0) {
       return res.status(400).json(errors);
     }
 
@@ -77,8 +77,8 @@ const login = async (req: Request, res: Response) => {
     res.set(
       "Set-Cookie",
       cookie.serialize("redit", token, {
-        httpOnly: process.env.NODE_ENV === "production" ? false : true,
-        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        // secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         maxAge: 3600,
         path: "/",
@@ -103,7 +103,7 @@ const logout = (_: Request, res: Response) => {
     "Set-Cookie",
     cookie.serialize("redit", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       expires: new Date(0),
       path: "/",
