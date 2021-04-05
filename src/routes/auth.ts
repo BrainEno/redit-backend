@@ -77,7 +77,7 @@ const login = async (req: Request, res: Response) => {
     res.set(
       "Set-Cookie",
       cookie.serialize("redit", token, {
-        httpOnly: true,
+        httpOnly: process.env.NODE_ENV === "production" ? false : true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         maxAge: 3600,
