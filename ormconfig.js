@@ -13,7 +13,7 @@ module.exports =
         synchronize: true,
         logging: true,
         extra: {
-          ssl: true,
+          ssl: false,
         },
         entities: [rootDir + "/entities/**/*{.ts,.js}"],
         migrations: [rootDir + "/migrations/**/*{.ts,.js}"],
@@ -26,6 +26,7 @@ module.exports =
         },
       }
     : {
+        name: "default",
         type: "postgres",
         url: process.env.DATABASE_URL,
         synchronize: true,
@@ -34,6 +35,9 @@ module.exports =
         migrations: [rootDir + "/migrations/**/*{.ts,.js}"],
         subscribers: [rootDir + "/subscriber/**/*{.ts,.js}"],
         seeds: [rootDir + "/seeds/**/*{.ts,.js}"],
+        extra: {
+          ssl: { rejectUnauthorized: false },
+        },
         cli: {
           entitiesDir: rootDir + "/entities",
           migrationsDir: rootDir + "/migrations",
