@@ -19,7 +19,7 @@ const createSub = async (req: Request, res: Response) => {
   try {
     let errors: any = {};
     if (isEmpty(name)) errors.name = "组名不得为空";
-    if (isEmpty(title)) errors.name = "标题不得为空";
+    if (isEmpty(title)) errors.title = "标题不得为空";
 
     //验证同名的sub是否已存在
     const sub = await getRepository(Sub)
