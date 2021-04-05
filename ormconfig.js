@@ -2,7 +2,7 @@ require("dotenv").config();
 const rootDir = process.env.NODE_ENV === "development" ? "src" : "dist";
 
 module.exports = {
-  type: process.env.DB_DIALECT,
+  type: "postgres",
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   username: process.env.DB_USERNAME,
