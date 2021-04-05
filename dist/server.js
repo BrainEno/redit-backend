@@ -42,7 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
 var express_1 = __importDefault(require("express"));
-var morgan_1 = __importDefault(require("morgan"));
 var dotenv_1 = __importDefault(require("dotenv"));
 var auth_1 = __importDefault(require("./routes/auth"));
 var posts_1 = __importDefault(require("./routes/posts"));
@@ -55,7 +54,6 @@ var cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 var app = express_1.default();
 app.use(express_1.default.json());
-app.use(morgan_1.default("dev"));
 app.use(trim_1.default);
 app.use(cookie_parser_1.default());
 app.use(cors_1.default({
